@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Receipt Service API
+  version: 1.0.0
+paths:
+  /api/create_order/:
+    post:
+      summary: Create a new order
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreateRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    OrderCreateRequest:
+      type: object
+      properties:
+        point_id:
+          type: integer
+        order:
+          type: object
+          properties:
+            order_id:
+              type: string
+            a:
+              type: string
+            c:
+              type: string
+      required:
+        - point_id
+        - order
+    OrderCreateResponse:
+      type: object
+      properties:
+        success:
+          type: string
+      required:
+        - success
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .header-left {
+            font-weight: bold;
+        }
+        .header-right {
+            text-align: right;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .order-details dt {
+            font-weight: bold;
+        }
+        .order-details dd {
+            margin-left: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RECEIPT</h1>
+        <div class="header-left">
+            <span>Order ID: {{ check.order.order_id }}</span>
+        </div>
+        <div class="header-right">
+            <span>Point ID: {{ check.printer_id.point_id }}</span>
+            <span>Check Type: {{ check.check_type }}</span>
+        </div>
+    </div>
+    <div class="order-details">
+        <dl>
+            {% for key, value in check.order.items %}
+                {% if key != 'order_id' %}
+                    <dt>{{ key }}</dt>
+                    <dd>{{ value }}</dd>
+                {% endif %}
+            {% endfor %}
+        </dl>
+    </div>
+    <div class="footer">
+        <p>Thank you for your purchase!</p>
+    </div>
+</body>
+</html>
