@@ -1,67 +1,79 @@
-openapi: 3.0.0
+swagger: '2.0'
 info:
-  title: Receipt Service API
-  version: 1.0.0
+  title: Snippets API
+  description: Test description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+host: 127.0.0.1:8000
+schemes:
+- http
+basePath: /api
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+- Basic: []
 paths:
-  /api/create_order/:
+  /create_order/:
     post:
-      summary: Create a new order
-      operationId: createOrder
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrderCreateRequest'
+      operationId: create_order_create
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+      - create_order
+    parameters: []
+  /doc/redoc/:
+    get:
+      operationId: doc_redoc_list
+      description: ''
+      parameters: []
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderCreateResponse'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-components:
-  schemas:
-    OrderCreateRequest:
-      type: object
-      properties:
-        point_id:
-          type: integer
-        order:
-          type: object
-          properties:
-            order_id:
-              type: string
-            a:
-              type: string
-            c:
-              type: string
-      required:
-        - point_id
-        - order
-    OrderCreateResponse:
-      type: object
-      properties:
-        success:
-          type: string
-      required:
-        - success
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-      required:
-        - error
+          description: ''
+      produces: []
+      tags:
+      - doc
+    parameters: []
+  /doc/swagger/:
+    get:
+      operationId: doc_swagger_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      produces: []
+      tags:
+      - doc
+    parameters: []
+  /schema/:
+    get:
+      operationId: schema_list
+      summary: OpenApi3 schema for this API. Format can be selected via content negotiation.
+      description: |-
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      produces:
+      - application/vnd.oai.openapi
+      - application/yaml
+      - application/vnd.oai.openapi+json
+      - application/json
+      tags:
+      - schema
+    parameters: []
+definitions: {}
